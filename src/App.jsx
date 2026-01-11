@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import Dashboard from './components/Dashboard';
+import AdBlockDetector from './components/AdBlockDetector';
 
 // Lazy load all tools for code-splitting
 const GPACalculator = lazy(() => import('./tools/GPACalculator'));
@@ -71,6 +72,8 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-slate-900 dark:via-purple-950 dark:to-slate-900 transition-colors duration-500 font-sans selection:bg-purple-500 selection:text-white overflow-x-hidden">
+      {/* Ad Block Detection Warning */}
+      <AdBlockDetector />
       {currentTool ? (
         <div className="animate-in fade-in slide-in-from-right duration-300">
           <div className="max-w-7xl mx-auto px-4 py-6">
