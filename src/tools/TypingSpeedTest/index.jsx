@@ -86,12 +86,17 @@ const TypingSpeedTest = () => {
     startTest(level);
   };
 
-  // Timer effect - fixed to avoid multiple intervals
+  // Timer effect - handles countdown and ends test when time runs out
   useEffect(() => {
     if (isActive && timeLeft > 0) {
       timerRef.current = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
+            // Clear interval and schedule endTest for after render
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+            // Use setTimeout to call endTest outside of setState callback
+            setTimeout(() => endTest(), 0);
             return 0;
           }
           return prev - 1;
@@ -105,14 +110,8 @@ const TypingSpeedTest = () => {
         }
       };
     }
-  }, [isActive]);
-
-  // End test when time runs out
-  useEffect(() => {
-    if (isActive && timeLeft === 0) {
-      endTest();
-    }
-  }, [timeLeft, isActive, endTest]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isActive, endTest]);
 
   const handleInput = (e) => {
     const value = e.target.value;
@@ -199,7 +198,7 @@ const TypingSpeedTest = () => {
           className="relative p-8 bg-white/50 dark:bg-black/30 rounded-2xl border border-white/20 dark:border-white/10 min-h-[280px] text-xl md:text-2xl leading-loose font-mono cursor-text shadow-inner"
           onClick={() => inputRef.current?.focus()}
         >
-          <div className="pointer-events-none select-none break-words whitespace-pre-wrap">
+          <div className="pointer-events-none select-none wrap-break-word whitespace-pre-wrap">
             {text.split('').map((char, index) => (
               <span key={index} className={`${getCharClass(index)} transition-colors duration-75`}>{char}</span>
             ))}
