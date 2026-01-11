@@ -2,7 +2,9 @@ import React from 'react';
 import { Calculator, Keyboard, Calendar, DollarSign, Palette, FileText, Terminal } from 'lucide-react';
 
 import HeroSection from './HeroSection';
+import AdBanner from './AdBanner';
 
+// eslint-disable-next-line no-unused-vars
 const ToolButton = ({ icon: Icon, title, description, onClick, color }) => (
   <button 
     onClick={onClick}
@@ -20,6 +22,9 @@ const Dashboard = ({ onSelectTool }) => {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-12">
       <HeroSection />
+
+      {/* Ad after hero section */}
+      <AdBanner slotId="YOUR_SLOT_ID_1" format="auto" className="mb-8" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <ToolButton 
@@ -72,8 +77,12 @@ const Dashboard = ({ onSelectTool }) => {
           color="bg-slate-700"
         />
       </div>
+
+      {/* Ad after tools grid */}
+      <AdBanner slotId="YOUR_SLOT_ID_2" format="auto" className="mt-8" />
     </div>
   );
 };
 
 export default Dashboard;
+

@@ -3,6 +3,7 @@ import { Download, Plus, Trash2, User, Briefcase, GraduationCap, Wrench, Code, S
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import ResumePreview from './ResumePreview';
+import AdBanner from '../../components/AdBanner';
 
 const TEMPLATES = [
   { id: 'modern', name: 'Modern', color: 'blue' },
@@ -462,8 +463,14 @@ const ResumeGenerator = () => {
               <ResumePreview ref={previewRef} data={resumeData} template={selectedTemplate} />
             </div>
           </div>
+          
+          {/* Ad below preview on desktop */}
+          <AdBanner slotId="resume-preview" format="auto" className="mt-4 hidden lg:block" />
         </div>
       </div>
+
+      {/* Mobile ad at bottom */}
+      <AdBanner slotId="resume-mobile" format="auto" className="lg:hidden mt-6" />
     </div>
   );
 };

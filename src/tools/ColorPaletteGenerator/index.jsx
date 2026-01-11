@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { RefreshCw, Lock, Unlock, Copy, Check, Download, Palette, Sparkles } from 'lucide-react';
+import AdBanner from '../../components/AdBanner';
 
 const ColorPaletteGenerator = () => {
   // Color harmony modes
@@ -279,12 +280,15 @@ const ColorPaletteGenerator = () => {
       </div>
 
       {/* Quick Info */}
-      <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+      <div className="text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
         <span className="inline-flex items-center gap-2 bg-gray-100 dark:bg-white/5 px-4 py-2 rounded-full">
           <Palette size={14} />
           Mode: <span className="font-medium text-purple-600 dark:text-purple-400">{harmonyModes.find(m => m.id === harmonyMode)?.name}</span>
         </span>
       </div>
+
+      {/* Ad Banner */}
+      <AdBanner slotId="palette-bottom" format="auto" className="max-w-3xl mx-auto" />
     </div>
   );
 };
