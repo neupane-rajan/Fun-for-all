@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Calculator, Keyboard, Calendar, DollarSign, Palette, FileText, Terminal } from 'lucide-react';
+import { Calculator, Keyboard, Calendar, DollarSign, Palette, FileText, Terminal, ChevronDown } from 'lucide-react';
 
 const HeroSection = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -147,6 +147,19 @@ const HeroSection = () => {
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{label}</span>
               </div>
             ))}
+          </div>
+
+          {/* Explore Tools Button */}
+          <div className="pt-6">
+            <button
+              onClick={() => {
+                document.getElementById('tools-grid')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
+            >
+              Explore Tools
+              <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+            </button>
           </div>
         </div>
         

@@ -26,7 +26,7 @@ const Dashboard = ({ onSelectTool }) => {
       {/* Ad after hero section */}
       <AdBanner slotId="YOUR_SLOT_ID_1" format="auto" className="mb-8" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="tools-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <ToolButton 
           icon={Calculator} 
           title="GPA Calculator" 
