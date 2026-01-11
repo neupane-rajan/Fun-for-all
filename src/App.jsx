@@ -1,15 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 import Dashboard from './components/Dashboard';
-import GPACalculator from './tools/GPACalculator';
 
-import TypingSpeedTest from './tools/TypingSpeedTest';
+// Lazy load all tools for code-splitting
+const GPACalculator = lazy(() => import('./tools/GPACalculator'));
+const TypingSpeedTest = lazy(() => import('./tools/TypingSpeedTest'));
+const StudyPlanner = lazy(() => import('./tools/StudyPlanner'));
+const EMICalculator = lazy(() => import('./tools/EMICalculator'));
+const ColorPaletteGenerator = lazy(() => import('./tools/ColorPaletteGenerator'));
+const ResumeGenerator = lazy(() => import('./tools/ResumeGenerator'));
+const LinuxCheatSheet = lazy(() => import('./tools/LinuxCheatSheet'));
 
-import StudyPlanner from './tools/StudyPlanner';
-import EMICalculator from './tools/EMICalculator';
-import ColorPaletteGenerator from './tools/ColorPaletteGenerator';
-import ResumeGenerator from './tools/ResumeGenerator';
-import LinuxCheatSheet from './tools/LinuxCheatSheet';
+// Loading spinner component
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-[400px]">
+    <div className="text-center">
+      <Loader2 className="w-10 h-10 animate-spin text-purple-600 mx-auto mb-3" />
+      <p className="text-gray-500 dark:text-gray-400">Loading tool...</p>
+    </div>
+  </div>
+);
 
 const App = () => {
   const [currentTool, setCurrentTool] = useState(() => {
@@ -72,7 +82,9 @@ const App = () => {
               Back to Dashboard
             </button>
           </div>
-          {renderTool()}
+          <Suspense fallback={<LoadingSpinner />}>
+            {renderTool()}
+          </Suspense>
         </div>
       ) : (
         <div className="animate-in fade-in slide-in-from-left duration-300">

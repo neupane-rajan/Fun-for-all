@@ -8,4 +8,15 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  build: {
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'pdf-libs': ['html2canvas', 'jspdf'],
+          'react-vendor': ['react', 'react-dom'],
+        }
+      }
+    }
+  }
 })
